@@ -1,6 +1,12 @@
 void keyPressed() {
   if (key == 'r')
     record = !record;
+
+  if (key == 's')
+    makeItSnowy = !makeItSnowy;
+
+  if (key == 'w')
+    makeItWindy = !makeItWindy;
 }
 
 void mouseDragged() {
@@ -23,5 +29,5 @@ void mouseDragged() {
   }
 
   if (mouseButton == RIGHT)
-    snow[x][y] += freezeThreshold / 2;
+    snow[x][y] += freezeThreshold *2;
 }

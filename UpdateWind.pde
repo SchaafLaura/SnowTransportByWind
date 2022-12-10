@@ -21,6 +21,7 @@ void StreamWind(int i, int j, float correctedTimeInverse) {
   for (int k = 0; k < 9; k++) {
     int x = i + (int)Velocities[k].x;
     int y = j + (int)Velocities[k].y;
+
     x = x < 0 ? gridSize - 1 : x;
     x = x == gridSize ? 0 : x;
     y = y < 0 ? gridSize - 1 : y;

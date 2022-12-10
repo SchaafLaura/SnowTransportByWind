@@ -2,16 +2,16 @@ final float cs = sqrt(1.0/3.0); // maximum possible velocity
 final float csSq = 1.0/3.0; // "speed of sound"
 final float csSqSq = csSq * csSq;
 
-final int gridSize = 100;
+final int gridSize = 125;
 
-final PVector gravity = new PVector(0, -cs/6.0);
+final PVector gravity = new PVector(0, -cs/4.5);
 
-final int freezeThreshold = 50;
+final int freezeThreshold = 15;
 
 final float erosionThresholdVelocitySq = 0.00001;
 final float erosionProbability = 0.25;
 
-final float toppleVelocitySq = erosionThresholdVelocitySq / 2.0;
+final float toppleVelocitySq = erosionThresholdVelocitySq / 3.5;
 final float toppleRatio = 1.0/3.0;
 final float fallRatio = 1.0/3.0;
 final float erodeRatio = 1.0/3.0;

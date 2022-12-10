@@ -9,9 +9,15 @@ void setup() {
 }
 
 boolean record = false;
+boolean makeItSnowy = false;
+boolean makeItWindy = true;
 void draw() {
-  AddSnow();
-  AddWind();
+  if (makeItSnowy)
+    AddSnow();
+  if (makeItWindy)
+    AddWind();
+    
+    
   StepWind();
   StepSnow();
 
@@ -32,7 +38,7 @@ void DrawGrid() {
       f = f == 0 ? 0 : f + 25;
       fill(f);
       if (snowD > freezeThreshold)
-        fill(200, 200, 255);
+        fill(230, 230, 255);
       if (boundary[i][j])
         fill(20);
       square(i * scale, j * scale, scale);

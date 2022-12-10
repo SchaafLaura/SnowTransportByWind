@@ -13,7 +13,7 @@ void StepSnow() {
       boolean isFrozen = IsFrozen(i, j);
       if (isFrozen && IsSupportedBelow(i, j) && TryWindErode(i, j))
         continue;
-      if (isFrozen && !(IsSupportedBelow(i, j) || IsSupportedSides(i, j) || IsSupportedAbove(i, j)) && TryFall(i, j))
+      if (isFrozen && !IsSupportedBelow(i, j) && !(IsSupportedSides(i, j) || IsSupportedAbove(i, j)) && TryFall(i, j))
         continue;
       if (isFrozen && TryTopple(i, j))
         continue;
