@@ -1,10 +1,14 @@
 boolean TryWindErode(int i, int j) {
   boolean aboveIsFrozen = j > 0 && IsFrozen(i, j-1);
   boolean windIsFast = j > 0 && Velocity(i, j-1).magSq() > erosionThresholdVelocitySq;
-  if (!aboveIsFrozen && windIsFast)
+
+  if (!aboveIsFrozen && windIsFast) {
     Erode(i, j);
-  else
+    return true;
+  } else {
     snowBuffer[i][j] += snow[i][j];
+  }
+
   return true;
 }
 

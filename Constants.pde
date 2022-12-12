@@ -7,8 +7,9 @@ final int gridSize = 125;
 final PVector gravity = new PVector(0, -cs/4.5);
 
 final int freezeThreshold = 15;
+final int snowSpawnAmount = 5;
 
-final float erosionThresholdVelocitySq = 0.00001;
+final float erosionThresholdVelocitySq = 0.000001;
 final float erosionProbability = 0.25;
 
 final float toppleVelocitySq = erosionThresholdVelocitySq / 3.5;

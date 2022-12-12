@@ -10,7 +10,7 @@ void setup() {
 
 boolean record = false;
 boolean makeItSnowy = false;
-boolean makeItWindy = true;
+boolean makeItWindy = false;
 void draw() {
   if (makeItSnowy)
     AddSnow();

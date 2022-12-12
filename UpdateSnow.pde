@@ -1,7 +1,7 @@
 void AddSnow() {
   for (int i = 0; i < gridSize; i++)
     if (random(0, 1) > 0.99)
-      snow[i][(int)random(1, 3)] += freezeThreshold;
+      snow[i][(int)random(1, 3)] += snowSpawnAmount;
 }
 
 void StepSnow() {
