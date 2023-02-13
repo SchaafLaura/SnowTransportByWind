@@ -2,7 +2,7 @@ boolean TryTopple(int i, int j) {
   if (j <= 0)
     return false;
   boolean leftIsFree = i > 0 && IsFree(i-1, j);
-  boolean rightIsFree = i < gridSize - 1 && IsFree(i+1, j);
+  boolean rightIsFree = i < gridSizeX - 1 && IsFree(i+1, j);
   if (!(leftIsFree || rightIsFree))
     return false;
 
@@ -24,6 +24,6 @@ void Topple(int i, int j, boolean leftIsFree, boolean rightIsFree) {
 
   if (i > 0)
     snowBuffer[i - 1][j] += erodeLeft;
-  if (i < gridSize - 1)
+  if (i < gridSizeX - 1)
     snowBuffer[i + 1][j] += erodeRight;
 }

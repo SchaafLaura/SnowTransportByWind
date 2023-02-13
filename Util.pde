@@ -7,24 +7,46 @@ boolean IsFrozen(int i, int j) {
 }
 
 boolean IsSupportedBelow(int i, int j) {
-  boolean belowIsSolid = j < gridSize - 1 && !IsFree(i, j+1);
+  boolean belowIsSolid = j < gridSizeY - 1 && !IsFree(i, j+1);
   boolean belowLeftIsSolid = i > 0 && !IsFree(i-1, j+1);
-  boolean belowRightIsSolid = i < gridSize - 1 && !IsFree(i+1, j+1);
+  boolean belowRightIsSolid = i < gridSizeY - 1 && !IsFree(i+1, j+1);
   return belowIsSolid && belowLeftIsSolid && belowRightIsSolid;
 }
 
 boolean IsSupportedSides(int i, int j) {
   boolean leftIsSolid = i > 0 && !IsFree(i-1, j);
-  boolean rightIsSolid = i < gridSize - 1 && !IsFree(i+1, j);
+  boolean rightIsSolid = i < gridSizeX - 1 && !IsFree(i+1, j);
   return leftIsSolid && rightIsSolid;
 }
 
 boolean IsSupportedAbove(int i, int j) {
   boolean aboveIsSolid = j > 0 && !IsFree(i, j-1);
   boolean aboveLeftIsSolid = j > 0 && i > 0 && !IsFree(i - 1, j - 1);
-  boolean aboveRightIsSolid = j > 0 && i < gridSize - 1 && !IsFree(i + 1, j - 1);
+  boolean aboveRightIsSolid = j > 0 && i < gridSizeY - 1 && !IsFree(i + 1, j - 1);
   return aboveIsSolid && (aboveLeftIsSolid || aboveRightIsSolid);
 }
+
+
+void SmoothWind() {
+  buffer = new float[gridSizeX][gridSizeY][numWeights];
+  for (int i = 0; i < gridSizeX; i++) {
+    for (int j = 0; j < gridSizeY; j++) {
+      for (int k = 0; k < numWeights; k++) {
+        float sum = 0;
+        for (int x = -1; x <= 1; x++) {
+          for (int y = -1; y <= 1; y++) {
+            int xx = (i + x + gridSizeX) % gridSizeX;
+            int yy = (j + y + gridSizeY) % gridSizeY;
+            sum += wind[xx][yy][k];
+          }
+        }
+        buffer[i][j][k] = sum/9.0;
+      }
+    }
+  }
+  CopyWindFromBuffer();
+}
+
 
 int Opposite(int k) {
   switch(k) {

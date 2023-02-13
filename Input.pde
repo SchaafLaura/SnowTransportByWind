@@ -1,4 +1,10 @@
 void keyPressed() {
+  if(key == ' ')
+    SetupWind();
+  
+  if (key == 'd')
+    DeleteSnow();
+
   if (key == 'r')
     record = !record;
 
@@ -7,6 +13,16 @@ void keyPressed() {
 
   if (key == 'w')
     makeItWindy = !makeItWindy;
+
+  if (key == '1') {
+    screen = 0;
+  }
+  if (key == '2') {
+    screen = 1;
+  }
+  if (key == '3') {
+    screen = 2;
+  }
 }
 
 void mouseDragged() {
@@ -22,9 +38,9 @@ void mouseDragged() {
       boundary[x-1][y] = true;
     if (y > 0)
       boundary[x][y-1] = true;
-    if (x < gridSize - 1)
+    if (x < gridSizeX - 1)
       boundary[x+1][y] = true;
-    if (y < gridSize - 1)
+    if (y < gridSizeY - 1)
       boundary[x][y+1] = true;
   }
 

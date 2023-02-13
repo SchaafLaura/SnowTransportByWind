@@ -1,13 +1,17 @@
 void AddSnow() {
-  for (int i = 0; i < gridSize; i++)
+  for (int i = 0; i < gridSizeX; i++)
     if (random(0, 1) > 0.99)
       snow[i][(int)random(1, 3)] += snowSpawnAmount;
+
+  for (int i = 0; i < gridSizeY; i++)
+    if (random(0, 1) > 0.995)
+      snow[(int)random(1, 3)][i] += snowSpawnAmount/2;
 }
 
 void StepSnow() {
-  snowBuffer = new int[gridSize][gridSize];
-  for (int i = 0; i < gridSize; i++) {
-    for (int j = 0; j < gridSize; j++) {
+  snowBuffer = new int[gridSizeX][gridSizeY];
+  for (int i = 0; i < gridSizeX; i++) {
+    for (int j = 0; j < gridSizeY; j++) {
       if (boundary[i][j])
         continue;
       boolean isFrozen = IsFrozen(i, j);
@@ -25,14 +29,14 @@ void StepSnow() {
 }
 
 void CopySnowFromBuffer() {
-  for (int i = 0; i < gridSize; i++)
-    for (int j = 0; j < gridSize; j++)
+  for (int i = 0; i < gridSizeX; i++)
+    for (int j = 0; j < gridSizeY; j++)
       snow[i][j] = snowBuffer[i][j];
 }
 
 void HandleSnowBoundaryConditions() {
-  for (int i = 0; i < gridSize; i++)
-    snowBuffer[gridSize - 1][i] = 0;
+  for (int i = 0; i < gridSizeY; i++)
+    snowBuffer[gridSizeX - 1][i] = 0;
 }
 
 void StreamSnow(int i, int j) {
@@ -48,8 +52,8 @@ void StreamSnow(int i, int j) {
 void MoveSnowParticleToNewLocation(int i, int j, float px, float p_x, float py, float p_y) {
   int x = i + MotionByProbability(px, p_x);
   int y = j + MotionByProbability(py, p_y);
-  x = constrain(x, 0, gridSize - 1);
-  y = constrain(y, 0, gridSize - 1);
+  x = constrain(x, 0, gridSizeX - 1);
+  y = constrain(y, 0, gridSizeY - 1);
 
   if (IsFree(x, y))
     snowBuffer[x][y] += 1;
@@ -65,4 +69,13 @@ int MotionByProbability(float pPos, float pNeg) {
   else if (q < pNeg)
     motion = -1;
   return motion;
+}
+
+void DeleteSnow() {
+  for (int i = 0; i < gridSizeX; i++)
+    for (int j = 0; j < gridSizeY; j++)
+      if (snow[i][j] < freezeThreshold - 1)
+        snow[i][j] = 0;
+      else
+        snow[i][j] = freezeThreshold + 1;
 }
